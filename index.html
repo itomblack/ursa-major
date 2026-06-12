@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mountain Glow — Benefits Section · Parallax Build</title>
+<title>Mountain Glow — Benefits Section · Parallax & Transition Variants</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
@@ -11,91 +11,137 @@
   :root{
     --serif:'Publico Text','Source Serif 4',Georgia,'Times New Roman',serif;
     --sans:'Founders Grotesk','Hanken Grotesk',ui-sans-serif,system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
-    --benefits-blue:#012275;       /* from Figma fill */
-    --benefits-muted:#CCCEC8;      /* secondary text on blue */
+    --benefits-blue:#012275;
+    --benefits-muted:#CCCEC8;
     --hairline:rgba(255,255,255,.3);
     --paper:#FBFAF7;
-    --placeholder:#D9D9D9;         /* Figma placeholder grey */
+    --placeholder:#D9D9D9;
     --ink:#16242E;
+    --gold:#C28A3D;
+    --bar-h:46px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{font-family:var(--sans);background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5}
+  body{font-family:var(--sans);background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5;padding-top:var(--bar-h)}
   img{display:block;max-width:100%}
+  button{font-family:inherit;cursor:pointer}
 
-  /* ---------- placeholder context sections (as in the Figma frame) ---------- */
-  .placeholder{
-    height:721.95px;background:var(--placeholder);
-    display:grid;place-items:center;
+  /* ---------- variant toggle banner ---------- */
+  .variant-bar{
+    position:fixed;left:0;right:0;top:0;height:var(--bar-h);z-index:100;
+    display:flex;align-items:center;justify-content:center;gap:14px;padding:0 14px;
+    background:rgba(251,250,247,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid #E4E0D6;
+    overflow-x:auto;scrollbar-width:none;
   }
-  .placeholder span{
-    font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:#8A8A86;
-    border:1px dashed #B5B5B0;border-radius:99px;padding:10px 22px;
+  .variant-bar::-webkit-scrollbar{display:none}
+  .vb-label{
+    font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#9A958A;white-space:nowrap;flex:none;
   }
+  .vb-group{display:flex;gap:4px;flex:none;align-items:center}
+  .vb-btn{
+    height:30px;padding:0 14px;border-radius:99px;border:1px solid transparent;background:none;
+    font-size:12.5px;color:#5A6068;white-space:nowrap;display:inline-flex;align-items:center;gap:7px;
+    transition:background .18s,color .18s,border-color .18s;
+  }
+  .vb-btn:hover{border-color:#D8D2C6;color:var(--ink)}
+  .vb-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .vb-btn[aria-pressed="true"]{background:var(--benefits-blue);color:#fff;font-weight:600}
+  .vb-btn .k{font-size:10px;opacity:.55;font-variant-numeric:tabular-nums}
+  .vb-sep{width:1px;height:18px;background:#E4E0D6;flex:none;display:none}
+  .vb-sep.show{display:block}
+  .vb-fx{display:none}
+  .vb-fx.show{display:flex}
+  .vb-fx .vb-btn[aria-pressed="true"]{background:var(--gold)}
+
+  /* ---------- placeholder context sections ---------- */
+  .placeholder{height:721.95px;background:var(--placeholder);display:grid;place-items:center}
+  .placeholder span{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:#8A8A86;border:1px dashed #B5B5B0;border-radius:99px;padding:10px 22px}
 
   /* ---------- Benefits section ---------- */
-  .benefits{
-    background:var(--benefits-blue);
-    padding:64px;
-    display:flex;flex-direction:column;gap:32px;align-items:center;justify-content:center;
-  }
-  .benefits-title{
-    display:flex;flex-direction:column;gap:12px;text-align:center;width:100%;padding-bottom:9px;
-  }
-  .benefits-title h2{
-    font-family:var(--serif);font-weight:400;color:#fff;
-    font-size:36px;line-height:44px;letter-spacing:0;
-    text-wrap:balance;
-  }
-  .benefits-title p{
-    font-family:var(--sans);font-weight:400;color:var(--benefits-muted);
-    font-size:18px;line-height:22px;letter-spacing:.09px;
-  }
+  .benefits{background:var(--benefits-blue);padding:64px;display:flex;flex-direction:column;gap:32px;align-items:center;justify-content:center}
+  .benefits-title{display:flex;flex-direction:column;gap:12px;text-align:center;width:100%;padding-bottom:9px}
+  .benefits-title h2{font-family:var(--serif);font-weight:400;color:#fff;font-size:36px;line-height:44px;text-wrap:balance}
+  .benefits-title p{font-weight:400;color:var(--benefits-muted);font-size:18px;line-height:22px;letter-spacing:.09px}
 
-  .benefits-row{
-    display:flex;gap:28px;align-items:center;justify-content:center;
-    width:100%;max-width:1312px;
-  }
-  .benefit-col{
-    flex:1 0 0;min-width:1px;display:flex;flex-direction:column;align-items:flex-start;padding:0 24px;
-  }
+  .benefits-row{display:flex;gap:28px;align-items:center;justify-content:center;width:100%;max-width:1312px}
+  .benefit-col{flex:1 0 0;min-width:1px;display:flex;flex-direction:column;align-items:flex-start;padding:0 24px}
 
-  .benefit{
-    display:flex;gap:20px;align-items:center;width:100%;
-  }
-  .benefit .icon{
-    flex:none;width:36px;height:36px;display:grid;place-items:center;color:#fff;
-  }
+  .benefit{display:flex;gap:20px;align-items:center;width:100%}
+  .benefit .icon{flex:none;width:36px;height:36px;display:grid;place-items:center;color:#fff}
   .benefit .icon svg{width:100%;height:auto;max-height:100%;overflow:visible}
-  .benefit .text{
-    flex:1 0 0;min-width:1px;display:flex;flex-direction:column;gap:2px;
-    padding:16px 0;border-bottom:.5px solid var(--hairline);
-  }
-  .benefit:last-child .text{border-bottom:.5px solid var(--hairline)} /* per design every row keeps its rule */
-  .benefit h3{
-    font-family:var(--serif);font-weight:400;color:#fff;
-    font-size:16px;line-height:22px;
-  }
-  .benefit p{
-    font-family:var(--sans);font-weight:400;color:var(--benefits-muted);
-    font-size:16px;line-height:21px;letter-spacing:.08px;
-  }
+  .benefit .text{flex:1 0 0;min-width:1px;display:flex;flex-direction:column;gap:2px;padding:16px 0;border-bottom:.5px solid var(--hairline)}
+  .benefit h3{font-family:var(--serif);font-weight:400;color:#fff;font-size:16px;line-height:22px}
+  .benefit p{font-weight:400;color:var(--benefits-muted);font-size:16px;line-height:21px;letter-spacing:.08px}
 
-  /* ---------- the arch image w/ parallax ---------- */
+  /* ---------- the arch ---------- */
   .arch{
     flex:none;width:413.283px;height:629.292px;
     border-radius:1000px;overflow:hidden;position:relative;
-    transform:translateZ(0); /* promote: keeps radius clipping crisp during animation (Safari) */
+    transform:translateZ(0);
+    /* JS-driven vars:
+       --py   parallax offset, serum layer (px)
+       --py2  slower parallax, botanical layer (px)
+       --te   eased transition progress 0..1
+       --tp   veil mask sweep position (%)
+       --lift depth-mode lift of the serum layer (px) */
   }
   .arch img{
     position:absolute;left:50%;top:50%;
     width:260%;max-width:none;height:auto;
+    will-change:transform,opacity;
+  }
+  .arch .img-b{
+    z-index:1;
+    transform:translate(-50%,calc(-50% + var(--py2,0px)));
+    opacity:0;
+  }
+  .arch .img-a{
+    z-index:2;
     transform:translate(-50%,calc(-50% + var(--py,0px)));
-    will-change:transform;
   }
-  @media (prefers-reduced-motion:reduce){
-    .arch img{transform:translate(-50%,-50%) !important}
+
+  /* --- FX 1 · Dissolve: filmic crossfade with counter-zoom --- */
+  .arch[data-fx="dissolve"] .img-a{
+    opacity:calc(1 - var(--te,0));
+    transform:translate(-50%,calc(-50% + var(--py,0px))) scale(calc(1 + .06 * var(--te,0)));
   }
+  .arch[data-fx="dissolve"] .img-b{
+    opacity:var(--te,0);
+    transform:translate(-50%,calc(-50% + var(--py2,0px))) scale(calc(1.08 - .08 * var(--te,0)));
+  }
+
+  /* --- FX 2 · Veil: soft-edged mask sweeps up to unveil the botanicals --- */
+  .arch[data-fx="veil"] .img-b{
+    opacity:1;
+    -webkit-mask-image:linear-gradient(to top,#000 calc(var(--tp,-20%) - 16%),transparent var(--tp,-20%));
+            mask-image:linear-gradient(to top,#000 calc(var(--tp,-20%) - 16%),transparent var(--tp,-20%));
+    -webkit-mask-size:100% 100%;mask-size:100% 100%;
+    z-index:2;
+  }
+  .arch[data-fx="veil"] .img-a{z-index:1;opacity:1}
+
+  /* --- FX 3 · Depth: serum lifts out faster than scroll, botanicals rise beneath --- */
+  .arch[data-fx="depth"] .img-a{
+    transform:translate(-50%,calc(-50% + var(--py,0px) - var(--lift,0px)));
+    opacity:calc(1.25 - .45 * var(--te,0));
+  }
+  .arch[data-fx="depth"] .img-b{
+    opacity:1;
+    transform:translate(-50%,calc(-50% + var(--py2,0px) + (1 - var(--te,0)) * 26px)) scale(calc(1.05 - .05 * var(--te,0)));
+  }
+
+  /* variant A — plain parallax, botanical layer fully hidden */
+  .arch[data-mode="A"] .img-b{opacity:0 !important;-webkit-mask-image:none;mask-image:none}
+  .arch[data-mode="A"] .img-a{opacity:1 !important;transform:translate(-50%,calc(-50% + var(--py,0px))) !important}
+
+  /* missing second image notice */
+  .arch .missing{
+    display:none;position:absolute;inset:auto 18px 22px 18px;z-index:5;
+    background:rgba(18,36,46,.82);color:#fff;border-radius:12px;padding:10px 14px;
+    font-size:12px;line-height:1.45;text-align:center;backdrop-filter:blur(4px);
+  }
+  .arch[data-missing="1"][data-mode="B"] .missing{display:block}
 
   /* ---------- responsive ---------- */
   @media (max-width:1080px){
@@ -109,10 +155,25 @@
     .benefits{padding:48px 20px}
     .benefits-title h2{font-size:30px;line-height:37px}
     .placeholder{height:480px}
+    .vb-label{display:none}
   }
 </style>
 </head>
 <body>
+
+  <nav class="variant-bar" aria-label="Section variants">
+    <span class="vb-label">Benefits&nbsp;·&nbsp;Variants</span>
+    <div class="vb-group" role="group" aria-label="Variant">
+      <button class="vb-btn" id="btn-a" aria-pressed="true"><span class="k">A</span>Parallax</button>
+      <button class="vb-btn" id="btn-b" aria-pressed="false"><span class="k">B</span>Image transition</button>
+    </div>
+    <div class="vb-sep" id="fx-sep"></div>
+    <div class="vb-group vb-fx" id="fx-group" role="group" aria-label="Transition style">
+      <button class="vb-btn fx" data-fx="dissolve" aria-pressed="true"><span class="k">1</span>Dissolve</button>
+      <button class="vb-btn fx" data-fx="veil" aria-pressed="false"><span class="k">2</span>Veil</button>
+      <button class="vb-btn fx" data-fx="depth" aria-pressed="false"><span class="k">3</span>Depth</button>
+    </div>
+  </nav>
 
   <section class="placeholder" aria-hidden="true"><span>Placeholder section · scroll</span></section>
 
@@ -163,8 +224,10 @@
 
       </div>
 
-      <div class="arch" id="parallax-arch">
-        <img id="parallax-img" src="assets/benefits-photo.jpg" alt="Mountain Glow Golden Serum bottle styled with pansies, moss and bark on a white surface">
+      <div class="arch" id="parallax-arch" data-mode="A" data-fx="dissolve">
+        <img class="img-b" id="img-b" src="assets/ingredients.jpg" alt="Birch bark and linden blossom ingredients on a white surface">
+        <img class="img-a" id="img-a" src="assets/benefits-photo.jpg" alt="Mountain Glow Golden Serum bottle styled with pansies, moss and bark on a white surface">
+        <div class="missing" role="note">Second image not found — save the botanical shot as <strong>assets/ingredients.jpg</strong> to enable the transition.</div>
       </div>
 
       <div class="benefit-col">
@@ -202,48 +265,86 @@
 
 <script>
 (function(){
-  // Gentle parallax: the photo inside the arch travels slower than the page.
-  // The img has vertical headroom (width 260% => height > arch height); we pan
-  // within that headroom based on how far the arch has crossed the viewport.
   var arch = document.getElementById('parallax-arch');
-  var img  = document.getElementById('parallax-img');
-  if (!arch || !img) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var imgA = document.getElementById('img-a');
+  var imgB = document.getElementById('img-b');
+  if (!arch || !imgA) return;
 
-  var headroom = 0;        // px the img can move before exposing an edge
-  var STRENGTH = 0.82;     // how much of the headroom we actually use (gentle)
-  var ticking = false;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STRENGTH = 0.82;          // parallax: fraction of headroom used
+  var T_START = -0.30;          // section progress where the transition begins
+  var T_END   =  0.42;          // ...and completes
+  var headroomA = 0, headroomB = 0, ticking = false;
+
+  imgB.addEventListener('error', function(){ arch.dataset.missing = '1'; });
+
+  function smooth(t){ return t * t * (3 - 2 * t); }
 
   function measure(){
-    // displayed img height vs arch height
-    var ih = img.getBoundingClientRect().height;
     var ah = arch.getBoundingClientRect().height;
-    headroom = Math.max(0, (ih - ah) / 2);
+    headroomA = Math.max(0, (imgA.getBoundingClientRect().height - ah) / 2);
+    headroomB = imgB.naturalWidth ? Math.max(0, (imgB.getBoundingClientRect().height - ah) / 2) : 0;
   }
 
   function update(){
     ticking = false;
-    if (!headroom) return;
     var r = arch.getBoundingClientRect();
     var vh = window.innerHeight;
-    // progress: -1 when arch's center is one half-viewport below center, +1 above
     var progress = ((vh / 2) - (r.top + r.height / 2)) / ((vh + r.height) / 2);
     progress = Math.max(-1, Math.min(1, progress));
-    var py = (progress * headroom * STRENGTH).toFixed(2);
-    img.style.setProperty('--py', py + 'px');
+
+    // parallax (botanical layer at half speed for depth)
+    var py  = reduced ? 0 : progress * headroomA * STRENGTH;
+    var py2 = reduced ? 0 : progress * headroomB * STRENGTH * 0.5;
+
+    // transition progress
+    var t = (progress - T_START) / (T_END - T_START);
+    t = Math.max(0, Math.min(1, t));
+    var te = reduced ? (t > 0.5 ? 1 : 0) : smooth(t);
+
+    arch.style.setProperty('--py',  py.toFixed(2) + 'px');
+    arch.style.setProperty('--py2', py2.toFixed(2) + 'px');
+    arch.style.setProperty('--te',  te.toFixed(4));
+    // veil: sweep the mask edge from below the arch (-20%) to past its top (130%)
+    arch.style.setProperty('--tp', (-20 + te * 150).toFixed(2) + '%');
+    // depth: lift the serum layer fully clear of the arch (height + overhang)
+    var lift = te * (r.height + headroomA + 20);
+    arch.style.setProperty('--lift', lift.toFixed(2) + 'px');
   }
 
-  function onScroll(){
-    if (!ticking){ ticking = true; requestAnimationFrame(update); }
-  }
+  function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }
 
-  if (img.complete) { measure(); update(); }
-  else img.addEventListener('load', function(){ measure(); update(); });
+  function ready(img, fn){ if (img.complete) fn(); else { img.addEventListener('load', fn); img.addEventListener('error', fn); } }
+  ready(imgA, function(){ measure(); update(); });
+  ready(imgB, function(){ measure(); update(); });
 
   addEventListener('scroll', onScroll, {passive:true});
   addEventListener('resize', function(){ measure(); update(); }, {passive:true});
+
+  /* ---------- variant toggle ---------- */
+  var btnA = document.getElementById('btn-a');
+  var btnB = document.getElementById('btn-b');
+  var fxGroup = document.getElementById('fx-group');
+  var fxSep = document.getElementById('fx-sep');
+  var fxBtns = [].slice.call(document.querySelectorAll('.vb-btn.fx'));
+
+  function setMode(m){
+    arch.dataset.mode = m;
+    btnA.setAttribute('aria-pressed', String(m === 'A'));
+    btnB.setAttribute('aria-pressed', String(m === 'B'));
+    fxGroup.classList.toggle('show', m === 'B');
+    fxSep.classList.toggle('show', m === 'B');
+    update();
+  }
+  function setFx(fx){
+    arch.dataset.fx = fx;
+    fxBtns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.fx === fx)); });
+    update();
+  }
+  btnA.addEventListener('click', function(){ setMode('A'); });
+  btnB.addEventListener('click', function(){ setMode('B'); });
+  fxBtns.forEach(function(b){ b.addEventListener('click', function(){ setFx(b.dataset.fx); }); });
 })();
 </script>
-
 </body>
 </html>
