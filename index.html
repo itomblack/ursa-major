@@ -174,14 +174,14 @@
   <nav class="variant-bar" aria-label="Section variants">
     <span class="vb-label">Benefits&nbsp;·&nbsp;Variants</span>
     <div class="vb-group" role="group" aria-label="Variant">
-      <button class="vb-btn" id="btn-a" aria-pressed="true"><span class="k">A</span>Parallax</button>
-      <button class="vb-btn" id="btn-b" aria-pressed="false"><span class="k">B</span>Image transition</button>
+      <button class="vb-btn" id="btn-a" aria-pressed="false"><span class="k">A</span>Parallax</button>
+      <button class="vb-btn" id="btn-b" aria-pressed="true"><span class="k">B</span>Image transition</button>
     </div>
-    <div class="vb-sep" id="fx-sep"></div>
-    <div class="vb-group vb-fx" id="fx-group" role="group" aria-label="Transition style">
-      <button class="vb-btn fx" data-fx="dissolve" aria-pressed="true"><span class="k">1</span>Dissolve</button>
+    <div class="vb-sep show" id="fx-sep"></div>
+    <div class="vb-group vb-fx show" id="fx-group" role="group" aria-label="Transition style">
+      <button class="vb-btn fx" data-fx="dissolve" aria-pressed="false"><span class="k">1</span>Dissolve</button>
       <button class="vb-btn fx" data-fx="veil" aria-pressed="false"><span class="k">2</span>Veil · soft</button>
-      <button class="vb-btn fx" data-fx="veil-hard" aria-pressed="false"><span class="k">3</span>Veil · hard</button>
+      <button class="vb-btn fx" data-fx="veil-hard" aria-pressed="true"><span class="k">3</span>Veil · hard</button>
       <button class="vb-btn fx" data-fx="depth" aria-pressed="false"><span class="k">4</span>Depth</button>
     </div>
   </nav>
@@ -235,7 +235,7 @@
 
       </div>
 
-      <div class="arch" id="parallax-arch" data-mode="A" data-fx="dissolve">
+      <div class="arch" id="parallax-arch" data-mode="B" data-fx="veil-hard">
         <img class="img-b" id="img-b" src="assets/ingredients.jpg" alt="Birch bark and linden blossom ingredients on a white surface">
         <img class="img-a" id="img-a" src="assets/benefits-photo.jpg" alt="Mountain Glow Golden Serum bottle styled with pansies, moss and bark on a white surface">
         <div class="missing" role="note">Second image not found — save the botanical shot as <strong>assets/ingredients.jpg</strong> to enable the transition.</div>
