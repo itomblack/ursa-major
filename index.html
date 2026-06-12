@@ -121,6 +121,16 @@
   }
   .arch[data-fx="veil"] .img-a{z-index:1;opacity:1}
 
+  /* --- FX 2b · Hard veil: same sweep, crisp clean edge (no feather) --- */
+  .arch[data-fx="veil-hard"] .img-b{
+    opacity:1;
+    -webkit-mask-image:linear-gradient(to top,#000 calc(var(--tp,-20%) - 0.3%),transparent var(--tp,-20%));
+            mask-image:linear-gradient(to top,#000 calc(var(--tp,-20%) - 0.3%),transparent var(--tp,-20%));
+    -webkit-mask-size:100% 100%;mask-size:100% 100%;
+    z-index:2;
+  }
+  .arch[data-fx="veil-hard"] .img-a{z-index:1;opacity:1}
+
   /* --- FX 3 · Depth: serum lifts out faster than scroll, botanicals rise beneath --- */
   .arch[data-fx="depth"] .img-a{
     transform:translate(-50%,calc(-50% + var(--py,0px) - var(--lift,0px)));
@@ -170,8 +180,9 @@
     <div class="vb-sep" id="fx-sep"></div>
     <div class="vb-group vb-fx" id="fx-group" role="group" aria-label="Transition style">
       <button class="vb-btn fx" data-fx="dissolve" aria-pressed="true"><span class="k">1</span>Dissolve</button>
-      <button class="vb-btn fx" data-fx="veil" aria-pressed="false"><span class="k">2</span>Veil</button>
-      <button class="vb-btn fx" data-fx="depth" aria-pressed="false"><span class="k">3</span>Depth</button>
+      <button class="vb-btn fx" data-fx="veil" aria-pressed="false"><span class="k">2</span>Veil · soft</button>
+      <button class="vb-btn fx" data-fx="veil-hard" aria-pressed="false"><span class="k">3</span>Veil · hard</button>
+      <button class="vb-btn fx" data-fx="depth" aria-pressed="false"><span class="k">4</span>Depth</button>
     </div>
   </nav>
 
